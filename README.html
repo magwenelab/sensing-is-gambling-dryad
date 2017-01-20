@@ -1,0 +1,986 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-01-20 Fri 12:23 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Data and Analysis for "When Sensing is Gambling"</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Colin S Maxwell and Paul M Magwene" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Data and Analysis for "When Sensing is Gambling"</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org697f072">1. Introduction</a></li>
+<li><a href="#orge101829">2. Requirements</a></li>
+<li><a href="#orgb9a1c3d">3. Files in this submission</a>
+<ul>
+<li><a href="#org179585f">3.1. 2017-Maxwell-Magwene-when-sensing-is-gambling-fig3.csv</a></li>
+<li><a href="#org7e5d592">3.2. 2017-Maxwell-Magwene-when-sensing-is-gambling-fig4.csv</a></li>
+<li><a href="#org1f938c4">3.3. 2017-Maxwell-Magwene-when-sensing-is-gambling-fig5-and-figS2.csv</a></li>
+<li><a href="#orgd6add3a">3.4. 2017-Maxwell-Magwene-when-sensing-is-gambling-fig6.csv</a></li>
+<li><a href="#org56acdff">3.5. 2017-Maxwell-Magwene-when-sensing-is-gambling-figS1a.csv</a></li>
+<li><a href="#org87b872d">3.6. 2017-Maxwell-Magwene-when-sensing-is-gambling-figS1b.csv</a></li>
+<li><a href="#org743e740">3.7. jpeg-scans</a></li>
+</ul>
+</li>
+<li><a href="#org4d3b818">4. Scripts used to generate the data files</a></li>
+<li><a href="#orgece2543">5. Miscellaneous code</a></li>
+<li><a href="#org8eaa341">6. Scripts used to create shared data sets</a></li>
+<li><a href="#org2e02b96">7. Scripts used to generate figures</a></li>
+<li><a href="#org6db644f">8. Statistics for Results</a>
+<ul>
+<li><a href="#orgac319dd">8.1. No detectable cost of plasticity in E1 media</a></li>
+<li><a href="#orgf21fe0e">8.2. Strong cost of plasticity in E2 media</a></li>
+<li><a href="#orgeb0cad5">8.3. No significant effect of the fluorescent tag on the cost of plasticity</a></li>
+<li><a href="#org805b26a">8.4. Mutation alters the diversification strategy of the plastic strain</a></li>
+</ul>
+</li>
+<li><a href="#orgdd17b9e">9. Session Info</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org697f072" class="outline-2">
+<h2 id="org697f072"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This document describes the data submitted to the Dryad repository for
+the paper "When Sensing is Gambling: An Experimental System Reveals
+how Plasticity can Generate Tunable Bet-Hedging Strategies" and
+provides links to the code (or the code itself) used to generate
+figures and the statistical analysis in the paper. This document is
+written in <a href="http:orgmode.org">org-mode</a> format, and is best viewed using emacs&#x2013;an
+open-source text editor. If this document is viewed on github, links
+don't necessarily point to the correct sections, and the results of
+source blocks (see below) are not displayed. If you want to look at
+this document in a web-browser, we recommend cloning the repo and
+examining <a href="README.html">this HTML</a> document that was exported from org-mode instead.
+</p>
+
+<p>
+The scripts used to produce the figures are stand-alone files linked
+to in the section <a href="#org888a29a">Scripts used to generate figures</a>.
+</p>
+
+<p>
+Statistics referenced in the text are listed in the sections
+<a href="#org607a72e">Statistics for Results</a>. The code used to generate the statistics is
+shown in <a href="http://orgmode.org/worg/org-contrib/babel/">org-babel</a> format, and can be run <i>in situ</i> in emacs. The
+results of each code block is shown below it, giving the statistic of
+interest.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge101829" class="outline-2">
+<h2 id="orge101829"><span class="section-number-2">2</span> Requirements</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+The analysis is written in the R programming language. See the section
+<a href="#orgf32328a">Session Info</a> for the version of R and the packages used to run these
+analyses. The scripts assume that all data data and scripts are in the
+same folder.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb9a1c3d" class="outline-2">
+<h2 id="orgb9a1c3d"><span class="section-number-2">3</span> Files in this submission</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+This section contains a list of the data files included in this
+submission and gives:
+</p>
+
+<ol class="org-ol">
+<li>A brief description of how the data were generated</li>
+<li>The name of the script (if any) that produced the data</li>
+<li>A description of the column names in the data, or the metadata for
+the files</li>
+</ol>
+</div>
+
+
+<div id="outline-container-org179585f" class="outline-3">
+<h3 id="org179585f"><span class="section-number-3">3.1</span> 2017-Maxwell-Magwene-when-sensing-is-gambling-fig3.csv</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+This is a file that gives the data used to generate Figure 3. The goal
+of this set of experiments was to determine the ability of different
+genotypes to grow in SC+5FOA and SC-ura media in different
+concentrations of estradiol. Each culture was measured at the
+beginning and end of a 24hr growth period. This file was generated by
+<a href="process-tradeoffs-fig3.R">process-tradeoffs-fig3.R</a>, which collates raw data in a folder not
+submitted to Dryad.
+</p>
+
+<hr  />
+
+<dl class="org-dl">
+<dt>rep</dt><dd>Replicate number</dd>
+<dt>media</dt><dd>Type of media</dd>
+<dt>estradiol</dt><dd>Concentration of estradiol in the media (nM)</dd>
+<dt>strain</dt><dd>The CMY number of the yeast strain</dd>
+<dt>ura3</dt><dd>Genotype of the strain at the URA3 locus</dd>
+<dt>post</dt><dd>Concentration of cells at the end of the period of growth (cells/nl)</dd>
+<dt>pre</dt><dd>Concentration of cells at the beginning of the period of growth (cells/nl)</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org7e5d592" class="outline-3">
+<h3 id="org7e5d592"><span class="section-number-3">3.2</span> 2017-Maxwell-Magwene-when-sensing-is-gambling-fig4.csv</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+This is a file that gives the data used to generate Figure 4. The goal
+of this set of experiments was to determine if strain that was plastic
+to the concentration of estradiol was pursuing a bet-hedging strategy
+in an environment with estradiol gradients and that alternated between
+SC-ura and SC+5FOA selection. This file was generated by
+<a href="process-competitions-fig4.R">process-competitions-fig4.R</a>, which collates raw data in a folder
+not submitted to Dryad.
+</p>
+
+<hr  />
+
+<dl class="org-dl">
+<dt>replicate</dt><dd>Eeplicate number</dd>
+<dt>epoch</dt><dd>Epoch in the competition</dd>
+<dt>pool</dt><dd>Which competition treatment does the</dd>
+<dt>treatment</dt><dd>Did the competition start with selection on SC+5FOA or SC-ura?</dd>
+<dt>name</dt><dd>The gate that the observation records information about. For
+example, the mCherry cells, or the unstained cells.</dd>
+<dt><code>percent_cells</code></dt><dd>The percent of the cells measured that were of that
+type (e.g. unstained, mCherry, etc.)</dd>
+<dt>Count.mL</dt><dd>Concentration of cells in the observation (cells/ml)</dd>
+<dt>Count</dt><dd>Number of cells collected in the observation</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org1f938c4" class="outline-3">
+<h3 id="org1f938c4"><span class="section-number-3">3.3</span> 2017-Maxwell-Magwene-when-sensing-is-gambling-fig5-and-figS2.csv</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+This is a file that gives the data used to generate Figure 5 and
+Supplementary Figure 2. The goal of this experiment was to determine
+if the <i>plastic</i> strain had a lower fitness than specialist
+strains. This file was generated by
+<a href="process-liquid-competitions-fig5.R">process-liquid-competitions-fig5.R</a>, which collates raw data in a
+folder not submitted to Dryad.
+</p>
+
+<hr  />
+
+<dl class="org-dl">
+<dt>replicate</dt><dd>replicate number</dd>
+<dt>gate</dt><dd>The gate that the observation records information
+about. Either "mCherry" for the <i>(red)</i> cells or "GFP" for the
+<i>(green)</i> cells.</dd>
+<dt>media</dt><dd>Media that the cells were grown in. SC-ura is E1 and
+SC+5FOA is E2.</dd>
+<dt>estradiol</dt><dd>Concentration of estradiol in the media.</dd>
+<dt><code>group_name</code></dt><dd>The competition experiment. An mCherry tagged version
+of the plastic strain was competed against a GFP tagged version
+of the plastic strain ("mCherry-vs-GFP"). An mCherry tagged
+version of the plastic strain was competed against either a
+<i>ura3</i> (P2) strain ("vs-ura3") or a <i>URA3</i> (P1) strain
+("vs-URA3").</dd>
+<dt>postselection</dt><dd>Number of cells counted for that observation after
+selection (diluted 1:50)</dd>
+<dt>preselection</dt><dd>Number of cells counted for that observation before
+selection (no dilution)</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-orgd6add3a" class="outline-3">
+<h3 id="orgd6add3a"><span class="section-number-3">3.4</span> 2017-Maxwell-Magwene-when-sensing-is-gambling-fig6.csv</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+This is a file that gives the data used to generate Figure 6. The goal
+of this experiment was to determine if mutation altered the
+diversification strategies of the <i>plastic</i> strain. This file was
+generated by <a href="process-images-fig6.R">process-images-fig6.R</a>, which collates the cropped
+image data into a csv file.
+</p>
+
+<hr  />
+
+<dl class="org-dl">
+<dt>file</dt><dd>Image used to generate the data</dd>
+<dt><code>pixels_from_center</code></dt><dd>number of pixels from the center of the plate</dd>
+<dt>intensity</dt><dd>Maximum intensity of that "column" of pixels.</dd>
+<dt>strain</dt><dd>CMY number of the strain being measured</dd>
+<dt>media</dt><dd>The media used to prepare the plate</dd>
+<dt>replicate</dt><dd>replicate number</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org56acdff" class="outline-3">
+<h3 id="org56acdff"><span class="section-number-3">3.5</span> 2017-Maxwell-Magwene-when-sensing-is-gambling-figS1a.csv</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+These data are optical density readings for cultures of yeast grown in
+different concentrations of SC+5FOA media and different concentrations
+of estradiol. The goal was to determine which degron tag on URA3 would
+allow for conditional growth on both SC-ura and SC+5FOA. This file was
+generated by <a href="process-degron-tag-figS1.R">process-degron-tag-figS1.R</a>.
+</p>
+
+<hr  />
+
+<dl class="org-dl">
+<dt>row</dt><dd>row on 96-well plate</dd>
+<dt>col</dt><dd>column on 96-well plate</dd>
+<dt>strain</dt><dd>strain number of yeast</dd>
+<dt>ura3</dt><dd>genotype of strain at the URA3 locus</dd>
+<dt>estradiol</dt><dd>concentration of estradiol in the media</dd>
+<dt>X5FOA</dt><dd>concentration of 5FOA in the media</dd>
+<dt>value</dt><dd>optical density of the well</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org87b872d" class="outline-3">
+<h3 id="org87b872d"><span class="section-number-3">3.6</span> 2017-Maxwell-Magwene-when-sensing-is-gambling-figS1b.csv</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+These data are optical density readings for cultures of yeast grown in
+SC-ura media and different concentrations of estradiol. The goal was
+to determine which degron tag on URA3 would allow for conditional
+growth on both SC-ura and SC+5FOA. This file was generated by
+<a href="process-degron-tag-figS1.R">process-degron-tag-figS1.R</a>.
+</p>
+
+
+<dl class="org-dl">
+<dt>row</dt><dd>row on 96-well plate</dd>
+<dt>col</dt><dd>column on 96-well plate</dd>
+<dt>strain</dt><dd>strain number of yeast</dd>
+<dt>ura3</dt><dd>genotype of strain at the URA3 locus</dd>
+<dt>estradiol</dt><dd>concentration of estradiol in the media</dd>
+<dt>value</dt><dd>optical density of the well</dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-org743e740" class="outline-3">
+<h3 id="org743e740"><span class="section-number-3">3.7</span> jpeg-scans</h3>
+<div class="outline-text-3" id="text-3-7">
+<p>
+These are JPEG files of the original tif files used to produce Figs. 2
+and 6. Note that Figure 2 was produced from replicate 1 and Figure 6B
+was produced with files from replicate 2.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> Meta-data for the raw scans of plates used to generate Fig. 6</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">file</th>
+<th scope="col" class="org-right">strain</th>
+<th scope="col" class="org-left">media</th>
+<th scope="col" class="org-right">replicate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>pdr5snq2_24hr002_cell18_cell28.jpeg</code></td>
+<td class="org-right">121</td>
+<td class="org-left">SC+5FOA</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>pdr5snq2_24hr002_cell20_cell32.jpeg</code></td>
+<td class="org-right">136</td>
+<td class="org-left">SC+5FOA</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>pdr5snq2_24hr002_cell21_cell33.jpeg</code></td>
+<td class="org-right">111</td>
+<td class="org-left">SC+5FOA</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>pdr5snq2_24hr002_cell22_cell34.jpeg</code></td>
+<td class="org-right">121</td>
+<td class="org-left">SC-ura</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>pdr5snq2_24hr002_cell23_cell35.jpeg</code></td>
+<td class="org-right">136</td>
+<td class="org-left">SC-ura</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>pdr5snq2_24hr002_cell24_cell36.jpeg</code></td>
+<td class="org-right">111</td>
+<td class="org-left">SC-ura</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>pdr5snq2_24hr002_cell25_cell37.jpeg</code></td>
+<td class="org-right">115</td>
+<td class="org-left">SC+5FOA</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>pdr5snq2_24hr002_cell26_cell38.jpeg</code></td>
+<td class="org-right">115</td>
+<td class="org-left">SC-ura</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr005_cell1_cell2.jpeg</code></td>
+<td class="org-right">121</td>
+<td class="org-left">SC+5FOA</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr005_cell2_cell3.jpeg</code></td>
+<td class="org-right">121</td>
+<td class="org-left">SC-ura</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr005_cell3_cell4.jpeg</code></td>
+<td class="org-right">115</td>
+<td class="org-left">SC+5FOA</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr005_cell4_cell1.jpeg</code></td>
+<td class="org-right">115</td>
+<td class="org-left">SC-ura</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr001_cell1_cell9.jpeg</code></td>
+<td class="org-right">136</td>
+<td class="org-left">SC+5FOA</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr001_cell2_cell10.jpeg</code></td>
+<td class="org-right">121</td>
+<td class="org-left">SC+5FOA</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr001_cell3_cell12.jpeg</code></td>
+<td class="org-right">115</td>
+<td class="org-left">SC+5FOA</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr001_cell4_cell13.jpeg</code></td>
+<td class="org-right">111</td>
+<td class="org-left">SC+5FOA</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr001_cell5_cell17.jpeg</code></td>
+<td class="org-right">136</td>
+<td class="org-left">SC-ura</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr001_cell6_cell14.jpeg</code></td>
+<td class="org-right">121</td>
+<td class="org-left">SC-ura</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr001_cell7_cell15.jpeg</code></td>
+<td class="org-right">115</td>
+<td class="org-left">SC-ura</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>24hr001_cell8_cell16.jpeg</code></td>
+<td class="org-right">111</td>
+<td class="org-left">SC-ura</td>
+<td class="org-right">3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org4d3b818" class="outline-2">
+<h2 id="org4d3b818"><span class="section-number-2">4</span> Scripts used to generate the data files</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+All scripts that begin with the name 'process' were run to generate
+data for the Dryad submission using files that will not be submitted
+to Dryad. The scripts filter data to contain only the data needed in
+the paper and annotate it with the appropriate metadata. Since these
+scripts rely on unsubmitted data, they cannot be run but are submitted
+to allow the data processing steps to be examined. See above for which
+scripts generated which files.
+</p>
+
+<hr  />
+
+<ul class="org-ul">
+<li><a href="process-tradeoffs-fig3.R">process-tradeoffs-fig3.R</a></li>
+<li><a href="process-competitions-fig4.R">process-competitions-fig4.R</a></li>
+<li><a href="process-liquid-competitions-fig5.R">process-liquid-competitions-fig5.R</a></li>
+<li><a href="process-images-fig6.R">process-images-fig6.R</a></li>
+<li><a href="process-degron-tag-figS1.R">process-degron-tag-figS1.R</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgece2543" class="outline-2">
+<h2 id="orgece2543"><span class="section-number-2">5</span> Miscellaneous code</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li><a href="functions.R">functions.R</a> - Misc. functions used in the analysis</li>
+<li><a href="load-libraries.R">load-libraries.R</a> - Loads all the libraries used in the analysis</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8eaa341" class="outline-2">
+<h2 id="org8eaa341"><span class="section-number-2">6</span> <a id="org6677d7b"></a> Scripts used to create shared data sets</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+All scripts that begin with the name 'analyze' are used to process
+data in a way that gets reused across multiple figures or code
+blocks. These scripts need to be run in order to generate data files used in the statistics section below.
+</p>
+
+<ul class="org-ul">
+<li><a href="analyze-liquid-competitions.R">analyze-liquid-competitions.R</a> - Calculate the fitness
+measurements used in the text</li>
+<li><a href="analyze-plate-patterns.R">analyze-plate-patterns.R</a> - Calculate smoothed profiles of
+growth on agar plates</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2e02b96" class="outline-2">
+<h2 id="org2e02b96"><span class="section-number-2">7</span> <a id="org888a29a"></a> Scripts used to generate figures</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Each figure panel that contains data was generated using the code
+contained in the scripts below.
+</p>
+
+<hr  />
+
+<ul class="org-ul">
+<li><a href="generate-figures.R">generate-figures.R</a> - convenience script to generate the
+figures and generate the shared data sets from the raw data</li>
+<li><a href="figure3.R">figure3.R</a></li>
+<li><a href="figure4.R">figure4.R</a></li>
+<li><a href="figure5.R">figure5.R</a></li>
+<li><a href="figure6.R">figure6.R</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6db644f" class="outline-2">
+<h2 id="org6db644f"><span class="section-number-2">8</span> <a id="org607a72e"></a> Statistics for Results</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+The following code blocks justify the statistics cited in the main
+text. Note that the two scripts in the <a href="#org6677d7b">"Scripts used to create shared
+data sets"</a> section.
+</p>
+</div>
+
+<div id="outline-container-orgac319dd" class="outline-3">
+<h3 id="orgac319dd"><span class="section-number-3">8.1</span> No detectable cost of plasticity in E1 media</h3>
+<div class="outline-text-3" id="text-8-1">
+<blockquote>
+<p>
+"In contrast, in E1 media the selection coefficient for the plastic
+strain relative to P1 was -0.019 and was not significantly different
+than 0 (one sample one-sided t-test; n = 3, p = 0.14)."
+</p>
+</blockquote>
+
+
+<div class="org-src-container">
+<pre class="src src-R">cop2_plastic <span style="color: #6a7550;">&lt;-</span> read.csv(<span style="color: #CC5542;">"2017-Maxwell-Magwene-when-sensing-is-gambling-fitness-calculations.csv"</span>)
+t.test(subset(cop2_plastic, (group_name == <span style="color: #CC5542;">"vs-URA3"</span>) &amp;
+                            (media2 == <span style="color: #CC5542;">"SC-ura, with estradiol"</span>))$sT,
+       mu = 0,
+       alternative=<span style="color: #CC5542;">"less"</span>)
+</pre>
+</div>
+
+<pre class="example">
+	One Sample t-test
+
+data:  subset(cop2_plastic, (group_name == "vs-URA3") &amp; (media2 == "SC-ura, with estradiol"))$sT
+t = -1.4445, df = 2, p-value = 0.1427
+alternative hypothesis: true mean is less than 0
+95 percent confidence interval:
+       -Inf 0.01979217
+sample estimates:
+ mean of x 
+-0.0193775
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf21fe0e" class="outline-3">
+<h3 id="orgf21fe0e"><span class="section-number-3">8.2</span> Strong cost of plasticity in E2 media</h3>
+<div class="outline-text-3" id="text-8-2">
+<blockquote>
+<p>
+"In E2 liquid media, the selection coefficient for the plastic strain
+relative to the P2 strain was -0.14 and was significantly different
+than 0 (one sample one-sided t-test; n = 3, p = 0.044), indicating a
+cost of plasticity."
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-R">cop2_plastic <span style="color: #6a7550;">&lt;-</span> read.csv(<span style="color: #CC5542;">"2017-Maxwell-Magwene-when-sensing-is-gambling-fitness-calculations.csv"</span>)
+t.test(subset(cop2_plastic, (group_name == <span style="color: #CC5542;">"vs-ura3"</span>) &amp;
+                            (media2 == <span style="color: #CC5542;">"SC+5FOA, without estradiol"</span>))$sT,
+       mu = 0,
+       alternative=<span style="color: #CC5542;">"less"</span>)
+</pre>
+</div>
+
+<pre class="example">
+	One Sample t-test
+
+data:  subset(cop2_plastic, (group_name == "vs-ura3") &amp; (media2 == "SC+5FOA, without estradiol"))$sT
+t = -3.1117, df = 2, p-value = 0.04481
+alternative hypothesis: true mean is less than 0
+95 percent confidence interval:
+         -Inf -0.008839538
+sample estimates:
+ mean of x 
+-0.1434755
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgeb0cad5" class="outline-3">
+<h3 id="orgeb0cad5"><span class="section-number-3">8.3</span> No significant effect of the fluorescent tag on the cost of plasticity</h3>
+<div class="outline-text-3" id="text-8-3">
+<blockquote>
+<p>
+"However, the fluorescent marker did not significantly affect the
+number of offspring produced by either of the strains in either E1 or
+E2 liquid (Fig. S3)(paired two-sided t-test, n = 3, p &gt; 0.26)"
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-R"><span style="color: #6a7550;">source</span>(<span style="color: #CC5542;">"load-libraries.R"</span>)
+
+theData <span style="color: #6a7550;">&lt;-</span> read.csv(<span style="color: #CC5542;">"2017-Maxwell-Magwene-when-sensing-is-gambling-fig5-and-figS2.csv"</span>) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+    subset(group_name == <span style="color: #CC5542;">"mCherry-vs-GFP"</span>) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+    subset((media == <span style="color: #CC5542;">"SC-ura"</span>) &amp; (estradiol == <span style="color: #CC5542;">"100nM"</span>) |
+           (media == <span style="color: #CC5542;">"SC+5FOA"</span>) &amp; (estradiol == <span style="color: #CC5542;">"0nM"</span>)) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+    transform(generations = log2((50*postselection)/preselection)) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+    dcast( replicate + media ~ gate, value.var=<span style="color: #CC5542;">"generations"</span>)
+
+cat(<span style="color: #CC5542;">"Test for difference in SC-ura:\n------------\n"</span>)
+with(subset(theData, media == <span style="color: #CC5542;">"SC-ura"</span>),
+     t.test(mCherry, GFP, paired=T))
+
+cat(<span style="color: #CC5542;">"Test for difference in SC+5FOA:\n------------\n"</span>)
+with(subset(theData, media == <span style="color: #CC5542;">"SC+5FOA"</span>),
+     t.test(mCherry, GFP, paired=T))
+</pre>
+</div>
+
+<pre class="example">
+Test for difference in SC-ura:
+------------
+
+	Paired t-test
+
+data:  mCherry and GFP
+t = -1.5559, df = 2, p-value = 0.26
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.7414909  0.3476474
+sample estimates:
+mean of the differences 
+             -0.1969217 
+
+Test for difference in SC+5FOA:
+------------
+
+	Paired t-test
+
+data:  mCherry and GFP
+t = 0.38866, df = 2, p-value = 0.735
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -1.020411  1.223062
+sample estimates:
+mean of the differences 
+              0.1013257
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org805b26a" class="outline-3">
+<h3 id="org805b26a"><span class="section-number-3">8.4</span> Mutation alters the diversification strategy of the plastic strain</h3>
+<div class="outline-text-3" id="text-8-4">
+<blockquote>
+<p>
+"We used this half-maximum point to estimate the relative proportion
+(area) of the environment that each strain was able to occupy. The
+genotype plastic(green) occupies 24% ± 1.6% of the E1 agar plates and
+69% ± 5.7% of the E2 agar plates. In contrast, a plastic ∆/∆ genotype
+occupies 46% ± 8% of the E1 environment and 49% ± 4% of E2 (All
+results expressed as means ± 95% CI based on three biological
+replicates)."
+</p>
+</blockquote>
+
+<div class="org-src-container">
+<pre class="src src-R"><span style="color: #6a7550;">source</span>(<span style="color: #CC5542;">"load-libraries.R"</span>)
+
+im.m.sm <span style="color: #6a7550;">&lt;-</span> read.csv(<span style="color: #CC5542;">"2017-Maxwell-Magwene-when-sensing-is-gambling-smoothed-plate-patterns.csv"</span>)
+
+im.m.sm <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+  subset( x &gt; 50) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+  subset( x &lt; 494) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+  ddply(.(strain, media, replicate),
+        plyr::summarize,
+        halfMax = max(sm)/2,
+        pos = 2.54*(x[which(sm &lt;= halfMax)[1]])/360, <span style="color: #6abd50;"># </span><span style="color: #6aaf50;">Convert to cm</span>
+        pos2 =2.54*(x[which(sm &gt;= halfMax)[1]])/360
+        ) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+  subset(strain %<span style="color: #7d7c61; font-weight: bold;">in</span>% c(<span style="color: #CC5542;">"CMY115"</span>, <span style="color: #CC5542;">"CMY121"</span>)) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+  transform( pos = apply( data.frame(pos, pos2), 1, max), pos2=<span style="color: #528fd1;">NULL</span>) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+  transform( area = pi * ( pos )^2 ) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+  transform( percentage = area/(pi*(8.3/2)^2)) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+  ddply(.(strain, media), <span style="color: #7d7c61; font-weight: bold;">function</span>(x) mean_cl_normal(x$percentage)) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+  transform(area.of.center=y,
+            plus.minus = y-ymin,
+            y = <span style="color: #528fd1;">NULL</span>,
+            ymin=<span style="color: #528fd1;">NULL</span>,
+            ymax=<span style="color: #528fd1;">NULL</span>) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+    transform(strain = factor(strain,
+                              levels=c(<span style="color: #CC5542;">"CMY121"</span>, <span style="color: #CC5542;">"CMY115"</span>),
+                              labels = c(<span style="color: #CC5542;">"platic.green"</span>, <span style="color: #CC5542;">"plastic D/D"</span>))) <span style="color: #bdbdb3; font-weight: bold;">%&gt;%</span>
+    transform(
+        area.occupied = round(abs( area.of.center - ifelse(media == <span style="color: #CC5542;">"foa"</span>, 1, 0)),2),
+        plus.minus = round(plus.minus, 3),
+        area.of.center = <span style="color: #528fd1;">NULL</span>)
+</pre>
+</div>
+
+<pre class="example">
+        strain media plus.minus area.occupied
+1  plastic D/D   foa      0.037          0.47
+2  plastic D/D   ura      0.081          0.46
+3 platic.green   foa      0.057          0.69
+4 platic.green   ura      0.017          0.24
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdd17b9e" class="outline-2">
+<h2 id="orgdd17b9e"><span class="section-number-2">9</span> <a id="orgf32328a"></a> Session Info</h2>
+<div class="outline-text-2" id="text-9">
+<div class="org-src-container">
+<pre class="src src-R"><span style="color: #6a7550;">source</span>(<span style="color: #CC5542;">"load-libraries.R"</span>)
+sessionInfo()
+</pre>
+</div>
+
+<pre class="example">
+R version 3.2.3 (2015-12-10)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+Running under: OS X 10.10.5 (Yosemite)
+
+locale:
+[1] C
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] colortools_0.1.5  wesanderson_0.3.2 magrittr_1.5      reshape2_1.4.1   
+[5] plyr_1.8.3        ggplot2_2.1.0    
+
+loaded via a namespace (and not attached):
+[1] colorspace_1.2-6 scales_0.4.0     tools_3.2.3      gtable_0.2.0    
+[5] Rcpp_0.12.4      stringi_1.0-1    grid_3.2.3       stringr_1.0.0   
+[9] munsell_0.4.3
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: January 2017</p>
+<p class="author">Author: Colin S Maxwell and Paul M Magwene</p>
+<p class="date">Created: 2017-01-20 Fri 12:23</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+source("analyze-liquid-competitions.R")
+source("analyze-plate-patterns.R")
+source("figure3.R")
+source("figure4.R")
+source("figure5.R")
+source("figure6.R")
+source("figureS1.R")
+source("figureS2.R")
